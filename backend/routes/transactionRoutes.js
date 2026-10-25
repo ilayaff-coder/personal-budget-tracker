@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { createTransaction, deleteTransaction, getTransaction, listTransactions, updateTransaction } from '../controllers/transactionController.js';
+import { requireDatabase } from '../controllers/dbGuard.js';
+import { requireAuth } from '../controllers/requireAuth.js';
+const router = Router();
+router.use(requireDatabase, requireAuth);
+router.get('/', listTransactions);
+router.post('/', createTransaction);
+router.get('/:id', getTransaction);
+router.put('/:id', updateTransaction);
+router.delete('/:id', deleteTransaction);
+export default router;

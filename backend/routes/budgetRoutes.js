@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { createBudget, deleteBudget, getBudget, listBudgets, updateBudget } from '../controllers/budgetController.js';
+import { requireDatabase } from '../controllers/dbGuard.js';
+import { requireAuth } from '../controllers/requireAuth.js';
+const router = Router();
+router.use(requireDatabase, requireAuth);
+router.get('/', listBudgets);
+router.post('/', createBudget);
+router.get('/:id', getBudget);
+router.put('/:id', updateBudget);
+router.delete('/:id', deleteBudget);
+export default router;
