@@ -10,7 +10,10 @@ import { requireDatabase } from './controllers/dbGuard.js';
 import { requireAuth } from './controllers/requireAuth.js';
 
 const app = express();
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
+const clientUrl = process.env.CLIENT_URL
+  ? (/^https?:\/\//i.test(process.env.CLIENT_URL) ? process.env.CLIENT_URL : `https://${process.env.CLIENT_URL}`)
+  : 'http://localhost:5173';
+app.use(cors({ origin: clientUrl }));
 app.use(express.json());
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' }));

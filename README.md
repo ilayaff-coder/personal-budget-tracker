@@ -72,6 +72,10 @@ Open [http://localhost:5173/dashboard](http://localhost:5173/dashboard). The API
 
 To run each service separately, use `npm run dev --prefix backend` and `npm run dev --prefix frontend` in separate terminals. To point the frontend at another API, create `frontend/.env` with `VITE_API_URL=http://localhost:5000/api`.
 
+## Deploy to Render
+
+The root `render.yaml` defines the API web service and frontend static site. Push this repository to GitHub, then create a new Blueprint in Render and select the repository. During setup, provide `MONGO_URI` for a hosted MongoDB database such as MongoDB Atlas. Render generates `JWT_SECRET`; service URLs are wired automatically. Do not add API keys, database credentials, or other secrets to this file or commit them to Git.
+
 ## Frontend pages
 
 - `/dashboard`
